@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-QMS Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-chart-line"></i> e-QMS</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-table"></i> Data Inspection</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Auditors</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+    </div>    <!-- Main Content -->
+    <div class="main-content">        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-brand">
+                    <h1><i class="fas fa-shield-alt"></i> E-QMS Dashboard</h1>
+                    <span class="brand-subtitle">Quality Management System</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-actions">
+                    <button class="btn-icon" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="btn-icon" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <i class="fas fa-user-circle"></i>
+                    <span>QMS Admin</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Filters Section - Moved outside header for better layout -->
+        <section class="filters-section">
+            <div class="filters-container">
+                <div class="filters-header">
+                    <h3><i class="fas fa-filter"></i> Data Filters</h3>
+                </div>
+                <div class="filters-content">
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" class="form-input">
+                        </div>
+                        <div class="filter-group">
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate" class="form-input">
+                        </div>
+                        <div class="filter-group">
+                            <label for="modelFilter">Model</label>
+                            <select id="modelFilter" class="form-select">
+                                <option value="">All Models</option>
+                            </select>
+                        </div>                        <div class="filter-group">
+                            <label for="auditorFilter">Auditor</label>
+                            <select id="auditorFilter" class="form-select">
+                                <option value="">All Auditors</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="ncvsFilter">NCVS</label>
+                            <select id="ncvsFilter" class="form-select">
+                                <option value="">All NCVS</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="styleFilter">Style Number</label>
+                            <select id="styleFilter" class="form-select">
+                                <option value="">All Styles</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button id="applyFilter" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Apply Filter
+                            </button>
+                            <button id="resetFilter" class="btn btn-secondary">
+                                <i class="fas fa-refresh"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Content -->
+        <main class="content">            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon bg-green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="fttRate">92.5%</h3>
+                        <p>FTT Rate</p>
+                        <span class="stat-change positive" id="fttTrend">+2.1% from last month</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-orange">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="reworkRate">5.2%</h3>
+                        <p>Rework Rate</p>
+                        <span class="stat-change negative" id="reworkTrend">-0.8% from last month</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-yellow">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="aGradeRate">78.3%</h3>
+                        <p>A-Grade Rate</p>
+                        <span class="stat-change positive" id="aGradeTrend">+3.5% from last month</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-red">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="avgDefects">2.4</h3>
+                        <p>Avg Defects/Piece</p>
+                        <span class="stat-change negative" id="defectTrend">-0.3 from last month</span>
+                    </div>
+                </div>
+            </div>            <!-- Charts Section -->
+            <div class="charts-grid">
+                <!-- FTT Trend Chart -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h3>FTT Trend</h3>
+                        <div class="chart-controls">
+                            <select id="chartTimeRange" class="form-select-sm">
+                                <option value="7">Last 7 days</option>
+                                <option value="30" selected>Last 30 days</option>
+                                <option value="90">Last 3 months</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="fttTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Defects Chart -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h3>Top Defects</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="topDefectsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Grade Distribution Chart -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h3>Grade Distribution</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="gradeDistributionChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- NCVS Performance Chart -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h3>NCVS Performance</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="ncvsPerformanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table Section -->
+            <div class="table-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Inspection Data</h3>
+                        <div class="table-info">
+                            <span id="tableInfo">Showing 0 of 0 records</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Loading Indicator -->
+                        <div id="loadingIndicator" class="loading-indicator">
+                            <div class="spinner"></div>
+                            <p>Loading data from Google Sheets...</p>
+                        </div>
+                        
+                        <!-- Data Table -->                        <div id="tableContainer" class="table-container" style="display: none;">
+                            <table id="dataTable" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Auditor</th>
+                                        <th>NCVS</th>
+                                        <th>Model</th>
+                                        <th>Style Number</th>
+                                        <th>Qty Inspect</th>
+                                        <th>FTT Rate</th>
+                                        <th>Rework Rate</th>
+                                        <th>Grade</th>
+                                        <th>Defects</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <!-- Data will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- No Data Message -->
+                        <div id="noDataMessage" class="no-data" style="display: none;">
+                            <i class="fas fa-inbox"></i>
+                            <p>No data found matching your filters</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
