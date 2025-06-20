@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "Modern e-QMS Dashboard with Google Sheets integration",
   "main": "index.html",
-  "scripts": {
-    "start": "http-server -p 8080 -c-1",
-    "dev": "live-server --port=3000 --open=/index.html",
-    "build": "echo 'No build process needed for static site'",
-    "serve": "python -m http.server 8000"
   },
   "keywords": [
     "dashboard",
