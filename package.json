@@ -1,0 +1,32 @@
+{
+  "name": "dashboard-e-qms",
+  "version": "1.0.0",
+  "description": "Modern e-QMS Dashboard with Google Sheets integration",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8080 -c-1",
+    "dev": "live-server --port=3000 --open=/index.html",
+    "build": "echo 'No build process needed for static site'",
+    "serve": "python -m http.server 8000"
+  },
+  "keywords": [
+    "dashboard",
+    "qms",
+    "quality-management",
+    "google-sheets",
+    "charts"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "your-repository-url"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
